@@ -1,11 +1,9 @@
 package com.system.ecommerce.data.cart;
 
 import com.system.ecommerce.core.cart.Cart;
+import com.system.ecommerce.core.cart.CartCheckout;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,14 +20,14 @@ public class CartData implements CartGateway {
     }
 
     @Override
-    public List<Cart> findCartEmail(String email) {
-        return cartRepository.findByEmailContaining(email).stream().map(Cart::toService)
-                .collect(Collectors.toList());
+    public Cart findCartEmail(String email) {
+        return cartRepository.findByEmailContainingAndStatus(email, false)
+                .stream().findFirst().map(Cart::toService).orElse(null);
     }
 
     @Override
-    public Cart findCart(Cart cart) {
-        CartModel cartModel = cartRepository.findById(cart.getId()).get();
+    public Cart findCart(CartCheckout cartCheckout) {
+        CartModel cartModel = cartRepository.findById(cartCheckout.getId()).get();
         return Cart.toService(cartModel);
     }
 }

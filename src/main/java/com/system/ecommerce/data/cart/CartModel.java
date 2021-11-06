@@ -1,14 +1,14 @@
 package com.system.ecommerce.data.cart;
 
 import com.system.ecommerce.core.cart.Cart;
+import com.system.ecommerce.data.product.ProductModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,22 +20,17 @@ public class CartModel {
     @Id
     @GeneratedValue
     private Long id;
-
-    @GeneratedValue
-    private Long idCartCustomer;
-
     private String email;
+    private boolean status;
 
-    private Integer ammount;
-
-    private Long idProduct;
+    @OneToMany
+    @JoinColumn(name = "idCart")
+    private List<ProductModel> productModelList;
 
     public static CartModel toModel(Cart cart) {
         return CartModel.builder()
                 .id(cart.getId())
                 .email(cart.getEmail())
-                .ammount(cart.getAmmount())
-                .idProduct(cart.getIdProduct())
                 .build();
     }
 }

@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface CartRepository extends JpaRepository<CartModel, Long> {
 
-    List<CartModel> findByEmailContaining(String email);
+    List<CartModel> findByEmailContainingAndStatus(String email, boolean status);
 }

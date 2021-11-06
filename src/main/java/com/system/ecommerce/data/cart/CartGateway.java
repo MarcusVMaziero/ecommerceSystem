@@ -1,14 +1,13 @@
 package com.system.ecommerce.data.cart;
 
 import com.system.ecommerce.core.cart.Cart;
-
-import java.util.List;
+import com.system.ecommerce.core.cart.CartCheckout;
 
 public interface CartGateway {
 
     Cart create(Cart cart);
 
-    List<Cart> findCartEmail(String email);
+    Cart findCartEmail(String email);
 
-    Cart findCart(Cart cart);
+    Cart findCart(CartCheckout cartCheckout);
 }
