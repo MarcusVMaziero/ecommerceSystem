@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -17,10 +18,10 @@ import java.util.List;
 public class Cart {
 
     private Long id;
-    private Long idCartCustomer;
     private String email;
     private Integer ammount;
     private Long idProduct;
+    private List<Product> productList;
 
     public static Cart toService(CartRequest cartRequest) {
         return Cart.builder()
@@ -34,10 +35,17 @@ public class Cart {
     public static Cart toService(CartModel cartModel) {
         return Cart.builder()
                 .id(cartModel.getId())
-                .idCartCustomer(cartModel.getIdCartCustomer())
                 .email(cartModel.getEmail())
-                .ammount(cartModel.getAmmount())
-                .idProduct(cartModel.getIdProduct())
+                .build();
+    }
+
+    public static Product toServiceCart(Product product, Cart cart) {
+        return Product.builder()
+                .code(product.getCode())
+                .name(product.getName())
+                .value(product.getValue())
+                .idCart(cart.getId())
+                .ammout(cart.getAmmount())
                 .build();
     }
 }

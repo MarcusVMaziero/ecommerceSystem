@@ -5,6 +5,8 @@ import com.system.ecommerce.data.cart.CartGateway;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+
 @RequiredArgsConstructor
 @Component
 public class CartService {
@@ -13,11 +15,22 @@ public class CartService {
     private final ProductService productService;
 
     public Cart create(Cart cart) {
-        var cartsActual = cartGateway.findCartEmail(cart.getEmail());
-        if (cartsActual.isEmpty()) {
-            return cartGateway.create(cart);
+
+        if (cartGateway.findCartEmail(cart.getEmail()) == null) {
+            var cartNew = cartGateway.create(cart);
+            cartNew.setAmmount(cart.getAmmount());
+            cartNew.setIdProduct(cart.getIdProduct());
+            productService.addProductToCart(cartNew);
+            return cartNew;
+        } else {
+            productService.addProductToCart(cart);
+            return cart;
         }
-        cart.setIdCartCustomer(cartsActual.stream().findFirst().get().getIdCartCustomer());
-        return cartGateway.create(cart);
+    }
+
+    public CartCheckout checkout(CartCheckout cartCheckout) {
+        var products = new ArrayList<>(cartGateway.findCart(cartCheckout).getProductList());
+        cartCheckout.toCartCheckout(products, 100.1);
+        return cartCheckout;
     }
 }
