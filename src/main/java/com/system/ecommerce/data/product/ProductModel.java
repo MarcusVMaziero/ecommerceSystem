@@ -20,12 +20,11 @@ public class ProductModel {
     @Id
     @GeneratedValue
     private Long id;
-
     private Long code;
-
     private String name;
-
     private Double value;
+    private Integer ammout;
+    private Long idCart;
 
     public static ProductModel toData(Product product) {
         return ProductModel.builder()

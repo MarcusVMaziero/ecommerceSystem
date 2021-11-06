@@ -24,7 +24,7 @@ public class ProductData implements ProductGateway {
     }
 
     @Override
-    public List<Product> findAllById(List<Long> idsProducts) {
-        return findAllById(idsProducts);
+    public Product findById(Long id) {
+        return Product.toService(productRepository.findById(id).get());
     }
 }

@@ -10,5 +10,5 @@ public interface ProductGateway {
 
     List<Product> findProducts();
 
-    List<Product> findAllById(List<Long> idsProducts);
+    Product findById(Long id);
 }
