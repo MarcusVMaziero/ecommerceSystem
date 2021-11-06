@@ -1,5 +1,6 @@
 package com.system.ecommerce.core.product;
 
+import com.system.ecommerce.core.cart.Cart;
 import com.system.ecommerce.data.product.ProductGateway;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -12,11 +13,11 @@ public class ProductService {
 
     private final ProductGateway productGateway;
 
-    public List<Product> findProducts(){
+    public List<Product> findProducts() {
         return productGateway.findProducts();
     }
 
-    public List<Product> findProducts(List<Long> idsProduct) {
-        return productGateway.findAllById(idsProduct);
+    public void addProductToCart(Cart cart) {
+        productGateway.create(Cart.toServiceCart(productGateway.findById(cart.getIdProduct()), cart));
     }
 }

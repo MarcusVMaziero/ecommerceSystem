@@ -19,6 +19,8 @@ public class Product {
     private Long code;
     private String name;
     private Double value;
+    private Long idCart;
+    private Integer ammout;
 
     public static Product toService(ProductRequest productRequest) {
         return Product.builder()
