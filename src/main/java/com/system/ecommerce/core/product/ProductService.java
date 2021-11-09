@@ -18,6 +18,6 @@ public class ProductService {
     }
 
     public void addProductToCart(Cart cart) {
-        productGateway.create(Cart.toServiceCart(productGateway.findById(cart.getIdProduct()), cart));
+        productGateway.create(Cart.toServiceCartAddProduct(productGateway.findById(cart.getIdProduct()), cart));
     }
 }

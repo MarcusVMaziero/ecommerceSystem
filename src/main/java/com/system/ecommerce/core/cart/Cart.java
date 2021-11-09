@@ -39,7 +39,17 @@ public class Cart {
                 .build();
     }
 
-    public static Product toServiceCart(Product product, Cart cart) {
+    public static Cart toCheckout(CartModel cartModel) {
+        return Cart.builder()
+                .id(cartModel.getId())
+                .email(cartModel.getEmail())
+                .productList(cartModel.getProductModelList()
+                        .stream().map(Product::toProductCheckout)
+                        .collect(Collectors.toList()))
+                .build();
+    }
+
+    public static Product toServiceCartAddProduct(Product product, Cart cart) {
         return Product.builder()
                 .code(product.getCode())
                 .name(product.getName())
