@@ -38,4 +38,15 @@ public class Product {
                 .value(productModel.getValue())
                 .build();
     }
+
+    public static Product toProductCheckout(ProductModel productModel) {
+        return Product.builder()
+                .id(productModel.getId())
+                .code(productModel.getCode())
+                .name(productModel.getName())
+                .value(productModel.getValue())
+                .ammout(productModel.getAmmout())
+                .idCart(productModel.getIdCart())
+                .build();
+    }
 }
