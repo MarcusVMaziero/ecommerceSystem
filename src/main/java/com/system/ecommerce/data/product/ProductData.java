@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,11 +21,13 @@ public class ProductData implements ProductGateway {
 
     @Override
     public List<Product> findProducts() {
-        return productRepository.findAll().stream().map(Product::toService).collect(Collectors.toList());
+        return productRepository.findByIdCart(null).stream()
+                .map(Product::toService)
+                .collect(Collectors.toList());
     }
 
     @Override
     public Product findById(Long id) {
-        return Product.toService(productRepository.findById(id).get());
+        return Product.toService(Objects.requireNonNull(productRepository.findById(id).orElse(null)));
     }
 }
