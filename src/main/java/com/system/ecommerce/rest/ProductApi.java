@@ -20,11 +20,13 @@ public class ProductApi {
 
     @GetMapping("products")
     public List<ProductResponse> getProducts() {
-        return productService.findProducts().stream().map(ProductResponse::toResponse).collect(Collectors.toList());
+        return productService.findProducts().stream()
+                .map(ProductResponse::toResponse)
+                .collect(Collectors.toList());
     }
 
     @PostMapping
-    public void postProduct(@RequestBody ProductRequest productRequest){
+    public void postProduct(@RequestBody ProductRequest productRequest) {
         productMQProducer.send(productRequest);
     }
 }
