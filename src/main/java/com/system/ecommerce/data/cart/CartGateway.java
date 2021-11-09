@@ -9,5 +9,5 @@ public interface CartGateway {
 
     Cart findCartEmail(String email);
 
-    Cart findCart(CartCheckout cartCheckout);
+    Cart findCartCheckout(CartCheckout cartCheckout);
 }

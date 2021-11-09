@@ -26,8 +26,8 @@ public class CartData implements CartGateway {
     }
 
     @Override
-    public Cart findCart(CartCheckout cartCheckout) {
+    public Cart findCartCheckout(CartCheckout cartCheckout) {
         CartModel cartModel = cartRepository.findById(cartCheckout.getId()).get();
-        return Cart.toService(cartModel);
+        return Cart.toCheckout(cartModel);
     }
 }
