@@ -32,6 +32,8 @@ public class ProductModel {
                 .code(product.getCode())
                 .name(product.getName())
                 .value(product.getValue())
+                .ammout(product.getAmmout())
+                .idCart(product.getIdCart())
                 .build();
     }
 }
