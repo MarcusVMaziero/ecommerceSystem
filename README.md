@@ -16,10 +16,14 @@ A aplicação roda na porta 8081.
 
 Foi criado um endpoint para cadastro de produtos que chama o RabbitMQ para efetivar este cadastro(esse endpoint é para teste)
 
-Ainda falta desenvolver:
+Para acessar o banco de dados H2: http://localhost:8081/user_db
 
-Refatorar fluxo do relacionamento entre Cart e Product
+Alterar JDBC URL para: jdbc:h2:./user_db
 
-Refatorar fluxo das services e data providers para anteder a alteração à cima citada
+Username H2: root / Password: root
 
-Criar endpoint de checkout
+## Melhorias a desenvolver
+
+* Criar novos objetos.
+* Desvincular fluxo para nova tabela no BD.
+* Criar testes de integração
