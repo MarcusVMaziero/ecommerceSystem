@@ -22,20 +22,10 @@ public class CartResponse {
     @JsonProperty("emailCustomer")
     private String email;
 
-    @JsonProperty("ammountProduct")
-    private Integer ammount;
-
-    @JsonProperty("idProduct")
-    private Long idProduct;
-
-    @JsonProperty("productList")
-    private List<Product> productList;
-
     public static CartResponse toResponse(Cart cart) {
         return CartResponse.builder()
                 .id(cart.getId())
                 .email(cart.getEmail())
-                .ammount(cart.getAmmount())
                 .build();
     }
 }
